@@ -1,0 +1,15 @@
+{
+  "name": "package-backend-tools",
+  "version": "1.0.0",
+  "description": "Collection of CLI tools for managing and maintaining the Pulsar Package Registry",
+  "main": "./src/index.js",
+  "author": "confused-Techie",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "commander": "^14.0.1",
+    "parse-github-url": "^1.0.3",
+    "postgres": "^3.4.7",
+    "prompt-sync": "^4.2.0"
+  }
+}
