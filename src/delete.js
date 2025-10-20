@@ -8,6 +8,7 @@ const utils = require("./utils.js");
 module.exports =
 async function deleteCmd(packName, opts) {
   let packagesToDelete = [];
+  let packagesDeleted = [];
 
   if (utils.isLengthyString(packName)) {
     packagesToDelete.push(packName);
@@ -91,6 +92,7 @@ async function deleteCmd(packName, opts) {
     }
 
     const del = await db.deletePackage(pointer.results, packName);
+    packagesDeleted.push(packName);
 
     if (!del.ok) {
       console.error("Unable to delete package");
@@ -103,5 +105,17 @@ async function deleteCmd(packName, opts) {
 
   await db.exit();
   console.log("Handled all packages.");
+
+  if (opts.track) {
+    if (packagesDeleted.length > 0) {
+      console.log("All packages deleted:");
+      for (let i = 0; i < packagesDeleted.length; i++) {
+        console.log(`  * ${packagesDeleted[i]}`);
+      }
+    } else {
+      console.log("No packages were deleted.");
+    }
+  }
+
   return;
 }
